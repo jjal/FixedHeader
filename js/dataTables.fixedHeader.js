@@ -210,10 +210,14 @@ $.extend( FixedHeader.prototype, {
 	{
 		var that = this;
 		var dt = this.s.dt;
-
+		var recalculate_position = function () { that.update() };			
 		$(window)
 			.on( 'scroll'+this.s.namespace, function () {
 				that._scroll();
+				if(recalculate_position) {
+					recalculate_position();
+					recalculate_position = false;
+				}
 			} )
 			.on( 'resize'+this.s.namespace, function () {
 				that.s.position.windowHeight = $(window).height();
